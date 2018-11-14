@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Le Silence des agneaux</title>
+    <base href="/"/>
+    <link type="text/css" href="<?=static::getUrl();?>views/css/main.css" rel="stylesheet"/>
+</head>
+<body <?php if (isset($data['pages_class'])):?> class="<?=$data['pages_class'];?>" <?php endif;?>>
+<nav>
+    <ul>
+        <li><a href="<?=static::getUrl('home');?>">Home</a></li>
+        <li><a href="<?=static::getUrl('director');?>">Director</a></li>
+        <li><a href="<?=static::getUrl('actor');?>">Casting</a></li>
+        <li><a href="<?=static::getUrl('about');?>">About</a></li>
+    </ul>
+</nav>
+<main>

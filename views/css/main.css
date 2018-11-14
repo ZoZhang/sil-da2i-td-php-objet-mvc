@@ -1,0 +1,197 @@
+/**
+    Style Global
+ */
+a{
+    color:#000;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+ul,li {
+    list-style-type:none;
+}
+img{
+    max-width:100%;
+}
+html,body{
+    font-size:1rem;
+    background-color: #fdfdfd;
+}
+figcaption{
+    font-style: italic;
+}
+main section,
+main aside{
+    margin: 0 0 3vh 0;
+}
+main aside > article > footer > ul{
+    display:flex;
+    overflow-x: scroll;
+}
+main aside > article > footer > ul > li{
+    margin:0 2vh 0 0;
+}
+main > aside > article > header > h1 {
+    padding:0 0 1vh 0;
+    text-transform: uppercase;
+}
+main {
+    max-width: 78vw;
+    margin: 0 auto;
+    overflow: hidden;
+}
+figure{
+    text-align: center;
+}
+ul,li,figure,figcaption,h1,html,body{
+    margin:0;
+    padding:0;
+}
+/**
+    Style Header Menu
+ */
+nav{
+    margin: 1.5vh 0 3vh 0;
+    background-color: #5a5858;
+}
+nav ul {
+    display:flex;
+    justify-content:center;
+}
+nav ul li{
+    flex:1;
+    text-align:center;
+}
+
+nav ul li a{
+    color: #FFF;
+    font-family: cursive,serif;
+    display: inline-block;
+    padding: 1vh 2vh 1vh 2vh;
+}
+
+nav ul li a:hover{
+    background-color: #6b6767;
+}
+
+/**
+    Style Main Contente
+ */
+main section:first-child article:first-child{
+    display:flex;
+}
+main section:first-child article:first-child > header {
+    padding:0vh 0vh 0vh 4vh;
+}
+
+main section:first-child article:first-child > header > div:first-child{
+    display: flex;
+    justify-content: space-between;
+}
+main section:first-child article:first-child > header > div:first-child > h1{
+    font-size: 4vh;
+}
+main section:first-child article:first-child > header > div:first-child > h1 > span{
+    color: #9c9898;
+    display: block;
+    font-size: 2.3vh;
+}
+main section:first-child article:first-child > header > p:last-child{
+    text-indent: 3vw;
+    line-height: 1.4rem;
+    overflow-y: scroll;
+}
+main section:nth-child(2) article:first-child > footer ul{
+    display: flex;
+    max-width: 100%;
+    overflow-x: scroll;
+}
+main aside > article > footer ul > li {
+    margin:0 0.5vw 0 0;
+}
+/**
+ * page-index
+ */
+.page-index article {
+    margin: 0 0 1.3rem 0;
+}
+.page-index article header h1{
+    text-align: center;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+.page-index article ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.page-index article ul li {
+    overflow: hidden;
+    margin: 1rem 1rem 0.2rem 0;
+}
+.page-index article ul li figcaption {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 150px;
+}
+.page-index article ul li img {
+    max-width: 150px;
+    min-width: 150px;
+    max-height: 200px;
+}
+
+/**
+ * Page Movie
+ */
+.page-movie main section article:first-child figure{
+    flex: 2;
+}
+.page-movie main section article:first-child header{
+    flex: 4;
+}
+.page-movie main aside article footer ul li img {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+/**
+ *  Page Biographie
+ */
+.biographie main img{
+    max-width: 150px;
+    min-width: 150px;
+    max-height: 200px;
+}
+.biographie main figcaption{
+    max-width: 91%;
+    margin: 0 auto;
+    text-align: center;
+}
+.biographie main > section > article > figure {
+    text-align: left;
+}
+.biographie main > section > article > header > h1{
+    margin: 0 0 1.3vw 0;
+}
+.biographie main > section > article:first-child > figure > figcaption {
+    text-align:left;
+    max-width: 100%;
+}
+.biographie main > section > article:nth-child(2) > ul{
+    display: flex;
+    flex-wrap: wrap;
+}
+.biographie main > section > article:nth-child(2) > ul li{
+    margin:0 1.2vw 0 0;
+}
+
+/**
+ * Page About
+ */
+.page-about main article footer{
+    padding:0.2rem 0 0.5rem 0;
+}
+.page-about main article footer ul {
+    line-height:1.8rem;
+}
