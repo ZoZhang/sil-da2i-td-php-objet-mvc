@@ -14,8 +14,8 @@ Trait Config {
     private static $_configs = [
         'db' => [
             'host' => '127.0.0.1',
-            'user' => 'web',
-            'pass' => 'webtd',
+            'user' => 'root',
+            'pass' => '',
             'name' => 'film',
         ]
     ];

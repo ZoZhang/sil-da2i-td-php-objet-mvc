@@ -13,9 +13,61 @@ abstract class AbstractsController
 {
     use \Film\Config;
 
-    protected static $_requests = null;
+    protected static $_requests = [];
 
     protected static $_templates = [];
+
+    /**
+     * Getter val request
+     * @return string
+     */
+    public static function getRequest($name='')
+    {
+        if (!isset(static::$_requests[$name])) {
+            throw new AppException("Warning:  {$name} Filed not define in request.");
+        }
+
+        return static::$_requests[$name];
+    }
+
+    /**
+     * Getter an model
+     */
+    public static function getModel($name)
+    {
+        $className = '\\Film\\'. ucfirst($name) . 'Model';
+
+        if (!class_exists($className)) {
+            throw new AppException("Warning: {$className} is not class");
+        }
+
+        return new $className;
+    }
+
+    /**
+     * Getter url domain
+     * @return string
+     */
+    public static function getUrl($name='')
+    {
+        return static::getRequest('url') . $name . '/';
+    }
+
+    /**
+     * Start Sessions
+     */
+    public static function startSession()
+    {
+        session_start();
+    }
+
+    /**
+     * Get cur page custom class name
+     */
+    protected static function getPageClass()
+    {
+        return '';
+    }
 
     /**
      * Initialize les configs
@@ -56,36 +108,6 @@ abstract class AbstractsController
     }
 
     /**
-     * Getter val request
-     * @return string
-     */
-    public static function getRequest($name='')
-    {
-        if (!isset(static::$_requests[$name])) {
-            throw new AppException("Warning:  {$name} Filed not define in request.");
-        }
-
-        return static::$_requests[$name];
-    }
-
-    /**
-     * Getter url domain
-     * @return string
-     */
-    public static function getUrl($name='')
-    {
-        return static::getRequest('url') . $name . '/';
-    }
-
-    /**
-     * Start Sessions
-     */
-    public static function startSession()
-    {
-        session_start();
-    }
-
-    /**
      * Load template file
      */
     public static function loadLayout()
@@ -97,7 +119,7 @@ abstract class AbstractsController
         foreach(static::$_templates as $_template) {
 
             if (!is_file(TEMPLATE_PATH . DS . $_template)) {
-                AppException::logger("Warning: {$_template} Page Template not found.", 1);
+                throw new AppException("Warning: {$_template} Page Template not found.");
                 continue;
             }
 

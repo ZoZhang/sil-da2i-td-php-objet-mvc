@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Le Silence des agneaux</title>
-    <base href="/"/>
-    <link type="text/css" href="<?=static::getUrl();?>views/css/main.css" rel="stylesheet"/>
+    <base href="<?=static::getUrl();?>"/>
+    <link type="text/css" href="css/main.css" rel="stylesheet"/>
 </head>
-<body <?php if (isset($data['pages_class'])):?> class="<?=$data['pages_class'];?>" <?php endif;?>>
+<body class="<?=static::getPageClass();?>">
 <nav>
     <ul>
         <li><a href="<?=static::getUrl('home');?>">Home</a></li>

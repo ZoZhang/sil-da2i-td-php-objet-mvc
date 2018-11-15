@@ -17,4 +17,14 @@ class DirectorController extends \Film\AbstractsController
         'footer.phtml'
     ];
 
+    /**
+     * Get cur page custom class name
+     */
+    protected static function getPageClass()
+    {
+        return 'biographie';
+    }
+
+
+
 }

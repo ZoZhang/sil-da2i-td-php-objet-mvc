@@ -6,17 +6,25 @@
  * @email  zo.zhang@gmail.com
  * @site   td2.web.zhaozhang.fr
  */
-namespace \Film;
+namespace Film;
 
-class Actor {
+class AbstractsModel {
+
+    /**
+     * Get data by database
+     */
+    public function getData($options=[])
+    {
+       return DB::getData($options);
+    }
 
     /*
-     * recevoir les informatinos bases
+     * Get info base
      * @return array
      */
     public function getBaseInfos()
     {
 
-    }
 
+    }
 }

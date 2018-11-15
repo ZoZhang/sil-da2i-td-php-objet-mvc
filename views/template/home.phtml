@@ -1,1 +1,65 @@
-dddd
+<?php if ($movies = static::getAllMovies()):?>
+<article>
+    <header>
+        <h1>Liste des films</h1>
+    </header>
+    <ul>
+        <?php foreach($movies as $movie):?>
+            <li>
+                <figure>
+                    <a href="/movie/id/<?=$movie->id?>">
+                        <img src="<?=$movie->film_image?>" />
+                    </a>
+                    <figcaption>
+                        <?=$movie->title?>
+                    </figcaption>
+                </figure>
+            </li>
+        <?php endforeach;?>
+    </ul>
+</article>
+<?php endif;?>
+
+<?php if ($directors = static::getAllDirectors()):?>
+<article>
+    <header>
+        <h1>Liste des réalisateurs</h1>
+    </header>
+    <ul>
+        <?php foreach($directors as $director):?>
+            <li>
+                <figure>
+                    <a href="/director/id/<?=$director->id?>">
+                        <img src="<?=$director->path;?>" />
+                    </a>
+                    <figcaption>
+                        <?=$director->firstname;?> <?=$director->lastname;?>
+                    </figcaption>
+                </figure>
+            </li>
+        <?php endforeach;?>
+    </ul>
+</article>
+<?php endif;?>
+
+<?php if ($actors = static::getAllActors()):?>
+<article>
+    <header>
+        <h1>Liste des acteurs</h1>
+    </header>
+    <ul>
+        <?php foreach($actors as $actor):?>
+            <li>
+                <figure>
+                    <a href="/actor/id/<?=$actor->id;?>">
+                        <img src="<?=$actor->path;?>" />
+                    </a>
+                    <figcaption>
+                        <?=$actor->firstname;?> <?=$actor->lastname;?>
+                    </figcaption>
+                </figure>
+            </li>
+        <?php endforeach;?>
+    </ul>
+</article>
+<?php endif;?>

@@ -44,22 +44,17 @@ use \Film\AbstractsController;
 
 class Bootstrap {
 
-    use \Film\Config;
-
     /*
      * Start application
      */
     public static function run()
     {
         try {
-
             //Dispatche les pages.
             AbstractsController::dispatche();
 
-
         } catch (AppException $e) {
             AppException::logger($e->getMessage(), 1);
-
         } catch (\Exception $e) {
             AppException::logger($e->getMessage(), 0);
         }

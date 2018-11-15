@@ -29,6 +29,10 @@ class AppException extends \Exception {
      */
     public static function logger($message, $level='0')
     {
+        if (!is_dir(LOG_PATH) && !is_writeable(LOG_PATH)) {
+            throw new \Exception("Plese check your permission direcotry.");
+        }
+        @mkdir(LOG_PATH);
         error_log($message . PHP_EOL , self::$_levels[$level]['type'],LOG_PATH . DS . self::$_levels[$level]['file']);
     }
 

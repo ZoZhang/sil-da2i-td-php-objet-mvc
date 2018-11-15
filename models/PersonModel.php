@@ -6,9 +6,9 @@
  * @email  zo.zhang@gmail.com
  * @site   td2.web.zhaozhang.fr
  */
-namespace \Film;
+namespace Film;
 
-class Person {
+class PersonModel extends AbstractsModel {
 
     /*
      * recevoir les informatinos bases
