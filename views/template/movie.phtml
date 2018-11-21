@@ -1,0 +1,107 @@
+<?php if($_movie = static::getMovie()):?>
+<section>
+    <article>
+        <figure>
+            <img src="<?=$_movie->film_image;?>" alt="<?=$_movie->film_legend;?>"/>
+            <figcaption><?=$_movie->film_legend;?></figcaption>
+        </figure>
+        <header>
+            <div>
+                <h1>
+                    <?=$_movie->title;?>
+                    <?php if ($_movie->title_original) :?>
+                        <span><?=$_movie->title_original;?></span>
+                    <?php endif;?>
+                </h1>
+                <p><strong>Note : </strong><meter value="<?=$_movie->rating;?>" min="0" max="5"></meter> <span><?=$_movie->rating;?>/5</span></p>
+            </div>
+            <p><strong>Date de sortie : </strong><time
+                        datetime="<?=$_movie->releaseDate;?>"><?=$_movie->format_releaseDate;?></time></p>
+
+            <?php if($_actors = static::getActors()):?>
+                <p><strong>Avec : </strong>
+                    <?php foreach($_actors as $index => $actor) :?>
+                        <a target="_blank" href="/actor/id/<?=$actor->id;?>"><?=$actor->firstname;?>
+                            <?=$actor->lastname;?></a>,
+                    <?php endforeach;?>
+                </p>
+            <?php endif;?>
+            <strong>SYNOPSIS</strong>
+            <p>
+                <?=$_movie->synopsis;?>
+            </p>
+        </header>
+    </article>
+</section>
+
+<?php if($_photos = static::getPhotos()) :?>
+    <aside>
+        <article>
+            <header><h1>Images du scénario</h1></header>
+            <footer>
+                <ul>
+                    <?php foreach ($_photos as $photo):?>
+                        <li><img src="<?=$photo->path;?>" alt="<?=$photo->legend;?>" /></li>
+                    <?php endforeach;?>
+                </ul>
+            </footer>
+        </article>
+    </aside>
+<?php endif;?>
+
+<?php if($_directors = static::getDirector()) :?>
+<aside>
+    <article>
+        <header>
+            <h1>Réalisateurs</h1>
+        </header>
+        <footer>
+            <ul>
+                <?php foreach($_directors as $director) :?>
+                    <li>
+                        <figure>
+                            <a href="/director/id/<?=$director->id;?>">
+                                <img src="<?=$director->path;?>" alt="<?=$director->legend;?>"
+                                     width="162"/>
+                            </a>
+                            <figcaption>
+                                <p><a href="/director/id/<?=$director->id;?>"><?=$director->firstname;?> <?=$director->lastname;?></a></p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                <?php endforeach;?>
+            </ul>
+        </footer>
+    </article>
+</aside>
+<?php endif;?>
+
+<?php if (count($_actors)):?>
+    <aside>
+        <article>
+            <header>
+                <h1>ACTEURS ET ACTRICES</h1>
+            </header>
+            <footer>
+                <ul>
+                    <?php foreach($_actors as $actor) :?>
+                        <li>
+                            <figure>
+                                <a href="/actor/id/<?=$actor->id;?>">
+                                    <img src="<?=$actor->path;?>" alt="<?=$actor->legend;?>" width="162"/>
+                                </a>
+                                <figcaption>
+                                    <p class="actor-name"><a href="/actor/id/<?=$actor->id;?>"><?=$actor->firstname;?>
+                                            <?=$actor->lastname;?></a></p>
+                                    <p class="role-name">Rôle: <?=$actor->roleName;?></p>
+                                </figcaption>
+                            </figure>
+                        </li>
+                    <?php endforeach;?>
+                </ul>
+            </footer>
+        </article>
+    </aside>
+<?php endif;?>
+
+<?php endif;?>

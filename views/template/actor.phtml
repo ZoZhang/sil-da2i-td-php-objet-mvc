@@ -1,0 +1,18 @@
+<section>
+<?php if($_actor = static::getActor()):?>
+    <article>
+        <figure>
+            <img src="<?=$_actor->path;?>" alt="<?=$_actor->legend;?>"/>
+            <figcaption>
+                <p><span>Name: </span> <?=$_actor->firstname;?> <?=$_actor->lastname;?></p>
+                <p><span>Naissance: </span> <time datetime="<?=$_actor->birthDate;?>"><?=$_actor->format_birthDate;?> </time></p>
+            </figcaption>
+        </figure>
+        <header>
+            <h1>BIOGRAPHIE</h1>
+            <p>
+                <?=$_actor->biography;?>
+            </p>
+        </header>
+    </article>
+<?php endif;?>

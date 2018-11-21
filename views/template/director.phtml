@@ -1,37 +1,18 @@
 <section>
-    <article>
-        <figure>
-            <img src="<?=$data['path']?>" alt="<?=$data['legend']?>"/>
-            <figcaption>
-                <p><span>Name: </span> <?=$data['firstname']?> <?=$data['lastname']?></p>
-                <p><span>Naissance: </span> <time datetime="<?=$data['birthDate']?>"><?=$data['format_birthDate']?> </time></p>
-            </figcaption>
-        </figure>
-        <header>
-            <h1>BIOGRAPHIE</h1>
-            <p>
-                <?=$data['biography']?>
-            </p>
-        </header>
-    </article>
-
-    <article>
-        <header>
-            <h1>FILMOGRAPHIE</h1>
-        </header>
-        <ul>
-            <?php foreach ($data['films'] as $film) :?>
-                <li>
-                    <figure>
-                        <a href="movie.php?id=<?=$film['id']?>"><img src="<?=$film['path']?>" width="150"
-                                                                     alt="<?=$film['legend']?>"/></a>
-                        <figcaption>
-                            <p><span><?=$film['title']?></span> <br/>(<time
-                                    datetime="<?=$film['releaseDate']?>"><?=$film['format_releaseDate']?></time> )</p>
-                        </figcaption>
-                    </figure>
-                </li>
-            <?php endforeach;?>
-        </ul>
-    </article>
-</section>
+<?php if($_director = static::getDirector()):?>
+        <article>
+            <figure>
+                <img src="<?=$_director->path;?>" alt="<?=$_director->legend;?>"/>
+                <figcaption>
+                    <p><span>Name: </span> <?=$_director->firstname;?> <?=$_director->lastname;?></p>
+                    <p><span>Naissance: </span> <time datetime="<?=$_director->birthDate;?>"><?=$_director->format_birthDate;?> </time></p>
+                </figcaption>
+            </figure>
+            <header>
+                <h1>BIOGRAPHIE</h1>
+                <p>
+                    <?=$_director->biography;?>
+                </p>
+            </header>
+        </article>
+<?php endif;?>

@@ -70,7 +70,7 @@ class DB {
     {
         $sql = '';
 
-        if (!isset($options['table']) || !isset($options['fields']) || !isset($options['where'])) {
+        if (!isset($options['table']) || !isset($options['fields'])) {
             throw new \PDOException('Pleles check your arguments.');
         }
 
@@ -84,7 +84,9 @@ class DB {
             }
         }
 
-        $sql .= ' WHERE ' . $options['where'];
+        if (isset($options['where'])) {
+            $sql .= ' WHERE ' . $options['where'];
+        }
 
         if (isset($options['order'])) {
             $sql .= ' ORDER BY ' . $options['order'];
@@ -108,7 +110,9 @@ class DB {
 
             self::prepare($sql);
 
-            self::query($options['parametes']);
+            if (isset($options['parametes'])) {
+                self::query($options['parametes']);
+            }
 
             $data = self::fetch();
         } catch (\PDOException $e) {

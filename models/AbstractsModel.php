@@ -19,12 +19,53 @@ class AbstractsModel {
     }
 
     /*
-     * Get info base
+     * Get paramete by url
+     * @return string|boolean|int
+     */
+    public function getParamete($name = [])
+    {
+        $paramete = AbstractsController::getRequest($name);
+
+        if (!is_null($paramete)) {
+            return $paramete;
+        }
+
+        return null;
+    }
+
+    /**
+     * get base info
      * @return array
      */
-    public function getBaseInfos()
+    public function getBaseInfos($options=[])
     {
+        $_data = [];
 
+        $_querys = [
+            'table'=> '`movieHasPerson` as MHP',
+            'fields' => ['DISTINCT P.id','P.firstname','P.lastname','P.birthDate','P.biography','PT.path','PT.legend'],
+            'left_join' => [
+                '`person` AS P'=>'P.id=MHP.idPerson',
+                '`personHasPicture` AS PHP'=>'PHP.idPerson = P.id',
+                '`picture` AS PT'=>'PT.id = PHP.idPicture',
+            ],
+            'where' => 'MHP.role=:role AND MHP.idPerson=:id'
+        ];
 
+        if (isset($options['id'])) {
+            $_querys['parametes'][':id'] = $options['id'];
+        }
+
+        if (isset($options['role'])) {
+            $_querys['parametes'][':role'] = $options['role'];
+        }
+        $_data = $this->getData($_querys);
+
+        if (count($_data)) {
+            $_data = array_shift($_data);
+            $_data->format_birthDate = date("d M Y", strtotime($_data->birthDate));
+        }
+
+        return $_data;
     }
 }

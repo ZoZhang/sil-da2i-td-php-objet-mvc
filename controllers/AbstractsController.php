@@ -17,17 +17,19 @@ abstract class AbstractsController
 
     protected static $_templates = [];
 
+    protected static $_pageClass = '';
+
     /**
      * Getter val request
      * @return string
      */
     public static function getRequest($name='')
     {
-        if (!isset(static::$_requests[$name])) {
-            throw new AppException("Warning:  {$name} Filed not define in request.");
+        if (isset(static::$_requests[$name])) {
+            return static::$_requests[$name];
         }
 
-        return static::$_requests[$name];
+        return null;
     }
 
     /**
@@ -66,7 +68,7 @@ abstract class AbstractsController
      */
     protected static function getPageClass()
     {
-        return '';
+        return static::$_pageClass;
     }
 
     /**
@@ -74,10 +76,26 @@ abstract class AbstractsController
      */
     public static function dispatche()
     {
-        preg_match('/^\/(\w+)/i', $_SERVER['REQUEST_URI'], $_controllerName);
+        $options = [];
+        preg_match('/^\/(\w+)(.*)/i', $_SERVER['REQUEST_URI'], $_controllerName);
 
         if (!isset($_controllerName[1])) {
             $_controllerName[1] = 'index';
+        }
+
+        if (isset($_controllerName[2])) {
+            $_urlParmetes = explode('/', $_controllerName[2]);
+
+            foreach($_urlParmetes as $index => $val) {
+                if ($index == 0 || empty($val)) continue;
+
+                if ($index%2) {
+
+                    if (isset($_urlParmetes[$index+1])) {
+                        $options[$val] = $_urlParmetes[$index+1];
+                    }
+                }
+            }
         }
 
         // replace default index page to home page.
@@ -88,13 +106,9 @@ abstract class AbstractsController
         //filter name controller
         array_shift($_REQUEST);
 
-        $options = [
-            'url' => ($_SERVER['HTTP_UPGRADE_INSECURE_REQUESTS'] ? 'http://' : 'https://') . $_SERVER['SERVER_NAME']
-                . '/',
+        $options['url'] = ($_SERVER['HTTP_UPGRADE_INSECURE_REQUESTS'] ? 'http://' : 'https://') . $_SERVER['SERVER_NAME'] . '/';
 
-        ];
-
-        self::$_requests = array_merge($options,$_REQUEST);
+        self::$_requests = array_merge($options, $_REQUEST);
 
         //self::$_controller = new $_controllerName;
        // call_user_func(self::$_controller->loadLayout(), array('options'=>array()));

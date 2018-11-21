@@ -19,13 +19,7 @@ class HomeController extends \Film\AbstractsController
         'footer.phtml'
     ];
 
-    /**
-     * Get cur page custom class name
-     */
-    protected static function getPageClass()
-    {
-        return 'page-index';
-    }
+    protected static $_pageClass = 'page-index';
 
     /**
      * Getter all movie
@@ -50,9 +44,9 @@ class HomeController extends \Film\AbstractsController
     {
         $actors = array();
 
-        $movieModel = static::getModel('movie');
+        $actorModel = static::getModel('actor');
 
-        $actors = $movieModel->getAllActors();
+        $actors = $actorModel->getAllActors();
 
         return $actors;
     }
@@ -65,9 +59,9 @@ class HomeController extends \Film\AbstractsController
     {
         $directors = array();
 
-        $movieModel = static::getModel('movie');
+        $directorModel = static::getModel('director');
 
-        $directors = $movieModel->getAllDirectors();
+        $directors = $directorModel->getAllDirectors();
 
         return $directors;
     }

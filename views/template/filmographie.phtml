@@ -1,0 +1,23 @@
+<?php if ($_movies = static::getMovieGraphie()):?>
+    <article>
+        <header>
+            <h1>FILMOGRAPHIE</h1>
+        </header>
+        <ul>
+            <?php foreach ($_movies as $movie) :?>
+                <li>
+                    <figure>
+                        <a href="/movie/id/<?=$movie->id;?>">
+                            <img src="<?=$movie->path;?>" width="150" alt="<?=$movie->legend;?>"/>
+                        </a>
+                        <figcaption>
+                            <p><span><?=$movie->title;?></span> <br/>(<time
+                                    datetime="<?=$movie->releaseDate;?>"><?=$movie->format_releaseDate;?></time> )</p>
+                        </figcaption>
+                    </figure>
+                </li>
+            <?php endforeach;?>
+        </ul>
+    </article>
+<?php endif;?>
+</section>

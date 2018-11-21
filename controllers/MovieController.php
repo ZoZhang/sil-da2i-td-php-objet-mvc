@@ -13,9 +13,73 @@ class MovieController extends \Film\AbstractsController
 {
     protected static $_templates = [
         'header.phtml',
-        'home.phtml',
+        'movie.phtml',
         'footer.phtml'
     ];
 
+    protected static $_pageClass = 'page-movie';
 
+    /**
+     * Get cur Movie info
+     */
+    public static function getMovie()
+    {
+        $movie  = array();
+
+        $model = static::getModel('movie');
+
+        $options = array('id'=>static::getRequest('id'));
+
+        $movie = $model->getBaseInfos($options);
+
+        return $movie;
+    }
+
+    /**
+     * Get cur movie photos
+     */
+    public static function getPhotos()
+    {
+        $photos  = array();
+
+        $model = static::getModel('movie');
+
+        $options = array('id_movie'=> static::getRequest('id'));
+
+        $photos = $model->getAllPhotos($options);
+
+        return $photos;
+    }
+
+    /**
+     * Get cur movie actors
+     */
+    public static function getActors()
+    {
+        $actors  = array();
+
+        $model = static::getModel('actor');
+
+        $options = array('id_movie'=> static::getRequest('id'));
+
+        $actors = $model->getAllActors($options);
+
+        return $actors;
+    }
+
+    /**
+     * Get cur movie director
+     */
+    public static function getDirector()
+    {
+        $director  = array();
+
+        $model = static::getModel('director');
+
+        $options = array('id_movie'=> static::getRequest('id'));
+
+        $director = $model->getDirector($options);
+
+        return $director;
+    }
 }

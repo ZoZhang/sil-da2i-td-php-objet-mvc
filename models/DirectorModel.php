@@ -10,13 +10,60 @@ namespace Film;
 
 class DirectorModel extends AbstractsModel {
 
-    /*
-     * recevoir les informatinos bases
+    /**
+     * get one director by movie
      * @return array
      */
-    public function getBaseInfos()
+    public function getDirector($options=[])
     {
+        $_querys = [
+            'table'=> '`movieHasPerson` as MP',
+            'fields' => ['P.id','P.firstname','P.lastname','MP.roleName','PT.path','PT.legend'],
+            'left_join' => [
+                '`person` as P'=>'P.id = MP.idPerson',
+                '`personHasPicture` as PHP'=>'P.id = PHP.idPerson',
+                '`picture` AS PT'=>'PT.id = PHP.idPicture',
+            ],
+            'where' => 'MP.role=:role',
+            'order' => 'P.firstname ASC',
+            'parametes' => [':role' => 'director']
+        ];
 
+        if (isset($options['id_movie'])) {
+            $_querys['where'] .= ' AND MP.idMovie in (:idMovie)';
+
+            if (is_array($options['id_movie'])) {
+                $options['id_movie'] = implode(',', $options['id_movie']);
+            }
+
+            $_querys['parametes'][':idMovie'] = $options['id_movie'];
+        }
+
+        $directors = $this->getData($_querys);
+
+        return $directors;
+    }
+
+    /**
+     * get all directors
+     * @return array
+     */
+    public function getAllDirectors()
+    {
+        $allDirectors = $this->getData([
+            'table'=> '`movieHasPerson` as MHP',
+            'fields' => ['DISTINCT P.id', 'PT.path', 'P.firstname', 'P.lastname'],
+            'left_join' => [
+                '`person` P'=>'P.id = MHP.idPerson',
+                '`personHasPicture` as PHP'=>'P.id = PHP.idPerson',
+                '`picture` as PT'=>'PT.id = PHP.idPicture',
+            ],
+            'where' => 'MHP.role = :role',
+            'order' => 'P.firstname ASC',
+            'parametes' => [':role' => 'director']
+        ]);
+
+        return $allDirectors;
     }
 
 }
