@@ -16,6 +16,7 @@ define('CP', dirname(__FILE__));
 define('ROOT_PATH', realpath(CP));
 define('LOG_PATH', ROOT_PATH . DS . 'var' . DS . 'log');
 define('TEMPLATE_PATH', ROOT_PATH . DS . 'views' . DS . 'template');
+define('ADMIN_TEMPLATE_PATH', ROOT_PATH . DS . 'views' . DS . 'admin');
 
 //Initialiser les errors logs configs
 //ini_set('error_reporting', '-1'); // '-1' : toutes les erreurs possibles
@@ -25,10 +26,11 @@ define('TEMPLATE_PATH', ROOT_PATH . DS . 'views' . DS . 'template');
 //Initializer les repertoir include
 set_include_path(
    get_include_path() . PS .
+   TEMPLATE_PATH . PS .
+   ADMIN_TEMPLATE_PATH . PS .
    ROOT_PATH . DS . 'models' .  PS .
    ROOT_PATH . DS . 'classes' . PS .
-   ROOT_PATH . DS . 'controllers' . PS .
-   ROOT_PATH . DS . 'views' . DS . 'template'
+   ROOT_PATH . DS . 'controllers' . PS
 );
 
 //Autoload class file.

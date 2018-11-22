@@ -83,6 +83,12 @@ abstract class AbstractsController
             $_controllerName[1] = 'index';
         }
 
+        if ('admin' == $_controllerName[1]) {
+            $options['is_admin'] = true;
+        } else {
+            $options['is_front'] = true;
+        }
+
         if (isset($_controllerName[2])) {
             $_urlParmetes = explode('/', $_controllerName[2]);
 
@@ -96,6 +102,10 @@ abstract class AbstractsController
                     }
                 }
             }
+        }
+
+        if (isset($_controllerName[2])) {
+            $_actionName = preg_replace('/\/(.*)/i','$1Action',$_controllerName[2]);
         }
 
         // replace default index page to home page.
@@ -118,6 +128,18 @@ abstract class AbstractsController
         }
 
         call_user_func_array(array($_controllerName, 'startSession'), array());
+
+        //authentifiant account
+        $_isAthentifiant = false;
+        if (method_exists($_controllerName,'authentifiant')) {
+            $_isAthentifiant = call_user_func_array(array($_controllerName, 'authentifiant'), array());
+        }
+
+        // call action by cur controller
+        if (isset($_actionName) && $_isAthentifiant && method_exists($_controllerName,$_actionName)) {
+            call_user_func_array(array($_controllerName, $_actionName), array());
+        }
+
         call_user_func_array(array($_controllerName, 'loadLayout'), array());
     }
 
@@ -130,9 +152,11 @@ abstract class AbstractsController
             throw new AppException("Warning: ". static::class . " Page not define template.");
         }
 
+        $_templatePath = (isset(self::$_requests['is_admin']) ? ADMIN_TEMPLATE_PATH : TEMPLATE_PATH ). DS;
+
         foreach(static::$_templates as $_template) {
 
-            if (!is_file(TEMPLATE_PATH . DS . $_template)) {
+            if (!is_file($_templatePath . $_template)) {
                 throw new AppException("Warning: {$_template} Page Template not found.");
                 continue;
             }

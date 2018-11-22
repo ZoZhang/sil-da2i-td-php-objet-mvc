@@ -1,0 +1,88 @@
+/**
+    Style Global
+ */
+a{
+    color:#000;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+ul,li {
+    list-style-type:none;
+}
+img{
+    max-width:100%;
+}
+html,body{
+    font-size:1rem;
+    background-color: #E8E8E8;
+}
+figcaption{
+    font-style: italic;
+}
+main section,
+main aside{
+    margin: 0 0 3vh 0;
+}
+main aside > article > footer > ul{
+    display:flex;
+    overflow-x: scroll;
+}
+main aside > article > footer > ul > li{
+    margin:0 2vh 0 0;
+}
+main > aside > article > header > h1 {
+    padding:0 0 1vh 0;
+    text-transform: uppercase;
+}
+main {
+    max-width: 78vw;
+    margin: 0 auto;
+    overflow: hidden;
+}
+figure{
+    text-align: center;
+}
+ul,li,figure,figcaption,h1,html,body{
+    margin:0;
+    padding:0;
+}
+
+/**
+ * Admin Login Page
+ */
+.admin-login main {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    text-align: center;
+}
+.admin-login main form {
+    color:#7D7D77;
+    background-color: #FFF;
+    border-radius: 9px;
+    min-width: 21rem;
+    min-height: 33vh;
+}
+.admin-login main form::before {
+    content: "";
+    display: block;
+    height: 74px;
+    width: 74px;
+    margin: -36px auto 0 auto;
+    background: url(../images/icons/account.png) left top no-repeat;
+}
+.admin-login main form input {
+    background-color: #F2F2F2;
+    padding: 0.8rem 0.7rem 0.8rem 0.7rem;
+    border-radius: 5px;
+    border: none;
+    min-width: 15rem;
+}
+.admin-login main form input[type="submit"]{
+    color: #FFFFFF;
+    cursor: pointer;
+    background-color: #3D7FBE;
+}

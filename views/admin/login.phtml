@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login Page</title>
+    <base href="<?=static::getUrl();?>"/>
+    <link type="text/css" href="css/admin.css" rel="stylesheet"/>
+</head>
+<body class="<?=static::getPageClass();?>">
+<main>
+    <form method="post" action="<?=static::getUrl('admin');?>">
+        <p>Admin Login</p>
+        <p><input type="text" name="username" placeholder="User Name"/></p>
+        <p><input type="text" name="password" placeholder="........"/></p>
+        <p><input type="submit" value="Login"/></p>
+    </form>
+</main>
+</body>
+</html>

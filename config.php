@@ -17,7 +17,7 @@ Trait Config {
             'user' => 'root',
             'pass' => '',
             'name' => 'film',
-        ]
+        ],
     ];
 
     /*
