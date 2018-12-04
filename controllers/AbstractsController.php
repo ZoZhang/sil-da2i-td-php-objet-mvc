@@ -13,10 +13,19 @@ abstract class AbstractsController
 {
     use \Film\Config;
 
+    //error messages
+    protected static $_errors = [];
+
+    //current request data
     protected static $_requests = [];
 
+    //dynamic data by controllers
+    protected static $_settings = [];
+
+    //dynamic template files
     protected static $_templates = [];
 
+    //current page main-class
     protected static $_pageClass = '';
 
     /**

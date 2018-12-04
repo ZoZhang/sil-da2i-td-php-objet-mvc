@@ -21,6 +21,9 @@ html,body{
 figcaption{
     font-style: italic;
 }
+.error-message {
+    color:#d81a1a;
+}
 main section,
 main aside{
     margin: 0 0 3vh 0;
@@ -63,7 +66,7 @@ ul,li,figure,figcaption,h1,html,body{
     color:#7D7D77;
     background-color: #FFF;
     border-radius: 9px;
-    min-width: 21rem;
+    min-width: 22rem;
     min-height: 33vh;
 }
 .admin-login main form::before {
@@ -79,7 +82,7 @@ ul,li,figure,figcaption,h1,html,body{
     padding: 0.8rem 0.7rem 0.8rem 0.7rem;
     border-radius: 5px;
     border: none;
-    min-width: 15rem;
+    min-width: 17rem;
 }
 .admin-login main form input[type="submit"]{
     color: #FFFFFF;

@@ -15,16 +15,20 @@ class AdminController extends \Film\AbstractsController
         'login.phtml',
     ];
 
-    //Verify identidy
+    //Verify identifiant
     protected static function authentifiant()
     {
         static::$_pageClass = 'admin-login';
 
-        if (!isset($_SESSION['identidyed']) || !$_SESSION['identidyed']) {
-            return false;
+        //appelle l'authentification
+        $model = static::getModel('admin');
+        if (!$model->authentifiant(static::$_requests) || !isset($_SESSION['admin'])) {
+            static::$_errors = [
+                'message'=> 'Username or password error, please try again'
+            ];
+        } else {
+            static::$_templates = ['dashboard.phtml'];
         }
-
-        return true;
     }
 
     protected static function filmAction()
