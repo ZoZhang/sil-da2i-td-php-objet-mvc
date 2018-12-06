@@ -20,6 +20,10 @@ class AdminController extends \Film\AbstractsController
     {
         static::$_pageClass = 'admin-login';
 
+        if (!isset(static::$_requests['username']) || !isset(static::$_requests['password'])) {
+            return false;
+        }
+
         //appelle l'authentification
         $model = static::getModel('admin');
         if (!$model->authentifiant(static::$_requests) || !isset($_SESSION['admin'])) {

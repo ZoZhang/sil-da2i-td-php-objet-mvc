@@ -12,7 +12,7 @@
         <p>Admin Login</p>
         <p><input type="email" name="username" placeholder="User Name"/></p>
         <p><input type="password" name="password" placeholder="........"/></p>
-        <?php if(isset(static::$_errors['message'])):?>
+        <?php if(isset(static::$_errors['message']) && !empty(static::$_errors['message'])):?>
         <p class="error-message"><?=static::$_errors['message']?></p>
         <?php endif;?>
         <p><input type="submit" value="Login"/></p>

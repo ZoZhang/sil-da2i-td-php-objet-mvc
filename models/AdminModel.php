@@ -16,10 +16,6 @@ class AdminModel extends AbstractsModel {
      */
     public function authentifiant($options=array())
     {
-        if (!isset($options['username']) || !isset($options['password'])) {
-            return false;
-        }
-
         $_querys = [
             'table'=> '`admin` as A',
             'fields' => ['DISTINCT A.id','A.first_name','A.last_name','A.email','A.password'],
