@@ -25,6 +25,7 @@ define('ADMIN_TEMPLATE_PATH', ROOT_PATH . DS . 'views' . DS . 'admin');
 
 //Initializer les repertoir include
 set_include_path(
+    ROOT_PATH . PS .
    get_include_path() . PS .
    TEMPLATE_PATH . PS .
    ADMIN_TEMPLATE_PATH . PS .
