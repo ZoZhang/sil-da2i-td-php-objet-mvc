@@ -19,9 +19,9 @@ define('TEMPLATE_PATH', ROOT_PATH . DS . 'views' . DS . 'template');
 define('ADMIN_TEMPLATE_PATH', ROOT_PATH . DS . 'views' . DS . 'admin');
 
 //Initialiser les errors logs configs
-//ini_set('error_reporting', '-1'); // '-1' : toutes les erreurs possibles
-//ini_set('display_errors', 'off');
-//ini_set('log_errors', 'on');
+ini_set('error_reporting', '-1'); // '-1' : toutes les erreurs possibles
+ini_set('display_errors', 'off');
+ini_set('log_errors', 'on');
 
 //Initializer les repertoir include
 set_include_path(

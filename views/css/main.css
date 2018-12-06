@@ -38,6 +38,7 @@ main > aside > article > header > h1 {
 }
 main {
     max-width: 78vw;
+    min-height: 80vh;
     margin: 0 auto;
     overflow: hidden;
 }

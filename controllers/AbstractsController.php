@@ -125,7 +125,8 @@ abstract class AbstractsController
         //filter name controller
         array_shift($_REQUEST);
 
-        $options['url'] = ($_SERVER['HTTP_UPGRADE_INSECURE_REQUESTS'] ? 'http://' : 'https://') . $_SERVER['SERVER_NAME'] . '/';
+        $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+        $options['url'] = $http_type . $_SERVER['HTTP_HOST'] . '/';
 
         self::$_requests = array_merge($options, $_REQUEST);
 
