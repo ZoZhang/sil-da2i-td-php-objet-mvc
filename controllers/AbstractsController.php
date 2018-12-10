@@ -114,7 +114,7 @@ abstract class AbstractsController
         }
 
         if (isset($_controllerName[2])) {
-            $_actionName = preg_replace('/\/(.*)/i','$1Action',$_controllerName[2]);
+            $_actionName = preg_replace('/\/(.*)\//i','$1Action',$_controllerName[2]);
         }
 
         // replace default index page to home page.
@@ -140,13 +140,18 @@ abstract class AbstractsController
         call_user_func_array(array($_controllerName, 'startSession'), array());
 
         //authentifiant account
-        $_isAthentifiant = false;
+        self::$_configs['is_authentied'] = false;
         if (method_exists($_controllerName,'authentifiant')) {
-            $_isAthentifiant = call_user_func_array(array($_controllerName, 'authentifiant'), array());
+            self::$_configs['is_authentied'] = call_user_func_array(array($_controllerName, 'authentifiant'), array());
+        }
+
+        //set default admin page after admin login
+        if (self::$_configs['is_authentied'] && stripos($_controllerName, 'admin') && empty($_actionName) || '/' == $_actionName) {
+            $_actionName  = 'dashboardAction';
         }
 
         // call action by cur controller
-        if (isset($_actionName) && $_isAthentifiant && method_exists($_controllerName,$_actionName)) {
+        if (isset($_actionName) && self::$_configs['is_authentied'] && method_exists($_controllerName,$_actionName)) {
             call_user_func_array(array($_controllerName, $_actionName), array());
         }
 
@@ -171,7 +176,7 @@ abstract class AbstractsController
                 continue;
             }
 
-            include_once $_template;
+            include_once $_templatePath . $_template;
         }
 
     }

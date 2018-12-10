@@ -8,7 +8,7 @@
  */
 namespace Film;
 
-class AbstractsModel {
+abstract class AbstractsModel {
 
     /**
      * Get data by database

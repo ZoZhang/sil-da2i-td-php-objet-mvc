@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login Page</title>
+    <base href="<?=static::getUrl();?>"/>
+    <link type="text/css" href="css/admin.css" rel="stylesheet"/>
+</head>
+<body class="<?=static::getPageClass();?>">
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="<?=static::getUrl('admin')?>">Dashboard</a>
+                </li>
+                <li>
+                    <a href="<?=static::getUrl('admin/film')?>">Film</a>
+                </li>
+                <li>
+                    <a href="<?=static::getUrl('admin/actor')?>">Actors</a>
+                </li>
+                <li>
+                    <a href="<?=static::getUrl('admin/director')?>">Directors</a>
+                </li>
+                <li>
+                    <a href="<?=static::getUrl()?>" target="_blank">Voir Frontend</a>
+                </li>
+                <li>
+                    <span>Bienvenue <?=static::getLoginUser('full_name');?></span>
+                </li>
+            </ul>
+        </nav>
+    </header>

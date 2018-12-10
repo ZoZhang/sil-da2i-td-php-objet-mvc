@@ -38,7 +38,7 @@ class AdminModel extends AbstractsModel {
 
         $_SESSION['admin'] = $admin[0];
 
-        return $admin;
+        return $admin[0];
     }
 
 }

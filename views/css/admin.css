@@ -16,6 +16,8 @@ img{
 }
 html,body{
     font-size:1rem;
+    font-family: "Arial";
+    margin:0.4rem;
     background-color: #E8E8E8;
 }
 figcaption{
@@ -47,9 +49,65 @@ main {
 figure{
     text-align: center;
 }
-ul,li,figure,figcaption,h1,html,body{
+ul,li,figure,figcaption,h1{
     margin:0;
     padding:0;
+}
+header nav {
+    font-size: 14px;
+    width: 100%;
+    overflow: hidden;
+}
+header nav, header nav ul {
+    list-style-type: none;
+    background-color:#5a5858;
+    margin: 0;
+    padding: 0;
+}
+header nav li {
+    float: left;
+}
+header nav li a {
+    display: block;
+    padding: 10px 15px;
+    color: #FFF;
+    text-decoration: none;
+    border-right: 1px solid #FFF;
+}
+header nav li a:hover {
+    background-color: #6b6767;
+}
+header nav li ul li {
+    float: none;
+}
+header nav li:last-child{
+    float: right;
+    margin: 0.6rem 2.2rem 0 0;
+}
+header nav li:last-child span {
+    color: #fff;
+}
+
+header nav li ul li a {
+    border-top: 1px solid #FFF;
+}
+header nav li ul {
+    display: none;
+    position: absolute;
+}
+header nav li:hover ul {
+    display: block;
+}
+main {
+    min-height: 38rem;
+    padding:2rem 0 0 1.3rem;
+}
+footer {
+    color: #fff;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    background-color: #5a5858;
 }
 
 /**
@@ -88,4 +146,12 @@ ul,li,figure,figcaption,h1,html,body{
     color: #FFFFFF;
     cursor: pointer;
     background-color: #3D7FBE;
+}
+
+/**
+ * Admin Dsahboard Page
+ */
+.admin-dsahboard main {
+    display: flex;
+    max-width: 100%;
 }
