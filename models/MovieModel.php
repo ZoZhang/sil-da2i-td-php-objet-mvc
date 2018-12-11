@@ -28,9 +28,9 @@ class MovieModel extends AbstractsModel {
 
     /**
      * get all movies
-     * @return array
+     * @return array|int
      */
-    public function getAllMovies($optinos=[])
+    public function getAllMovies($options=[])
     {
         $allMovies = [];
 
@@ -47,12 +47,20 @@ class MovieModel extends AbstractsModel {
             'parametes' => [':pictureType' => 'poster']
         ];
 
-        if (isset($optinos['id'])) {
+        if (isset($options['count_only'])) {
+            $_querys['fields'][] = 'count(*) as total';
+        }
+
+        if (isset($options['id'])) {
             $_querys['where'] = ' M.id=:id';
-            $_querys['parametes'][':id'] = $optinos['id'];
+            $_querys['parametes'][':id'] = $options['id'];
         }
 
         $allMovies = $this->getData($_querys);
+
+        if (isset($options['count_only'])) {
+            return $allMovies[0]->total;
+        }
 
         return $allMovies;
     }

@@ -48,7 +48,7 @@ class AdminController extends \Film\AbstractsController
     {
         $data = '';
         if (!isset($_SESSION['admin'])) {
-            return;
+            return $data;
         }
 
         switch ($field) {
@@ -63,17 +63,36 @@ class AdminController extends \Film\AbstractsController
     }
 
     /**
+     * logout administrator
+     */
+    public static function logoutAction()
+    {
+        unset($_SESSION['admin']);
+
+        static::redirectUrl('/');
+    }
+
+    /**
      * Dashboard Page
      * @return null
      */
     protected static function dashboardAction()
     {
-        static::$_pageClass = 'admin-dsahboard';
+        static::$_pageClass = 'admin admin-dsahboard';
+
         static::$_templates = [
             'header.phtml',
             'dashboard.phtml',
             'footer.phtml'
         ];
+
+        $movieModel = static::getModel('movie');
+        $actorModel = static::getModel('actor');
+        $directorModel = static::getModel('director');
+
+        static::$_settings['total_movie'] = $movieModel->getAllMovies(array('count_only'=>true));
+        static::$_settings['total_actor'] = $actorModel->getAllActors(array('count_only'=>true));
+        static::$_settings['total_director'] = $directorModel->getAllDirectors(array('count_only'=>true));
     }
 
     /**
@@ -81,9 +100,38 @@ class AdminController extends \Film\AbstractsController
      */
     protected static function filmAction()
     {
+        static::$_pageClass = 'admin admin-film';
 
-        die('tdssest');
+        static::$_templates = [
+            'header.phtml',
+            'film.phtml',
+            'footer.phtml'
+        ];
 
+        var_dump(self::$_requests['film']['id']);
+        //default film list
+        if (!isset(self::$_requests['film']['id'])) {
+            $movieModel = static::getModel('movie');
+
+            static::$_settings['all_movie'] = $movieModel->getAllMovies();
+        } else {
+
+            $_operation = self::$_requests['film']['operation'];
+
+            switch($_operation) {
+                case 'add':
+
+                    break;
+
+                case 'modify':
+                    break;
+
+                case 'delete':
+
+                    break;
+            }
+
+        }
     }
 
 }

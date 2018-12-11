@@ -1,5 +1,28 @@
-<main>
-    <section>
-        <article>ddddd</article>
-    </section>
-</main>
+<section>
+    <?php if ($totalActor = static::getSettings('total_actor')):?>
+            <article>
+                <p>
+                    Vous avez <?=$totalActor;?> actors.
+                    <a href="<?=static::getUrl('admin/actor')?>">Modfication</a>
+                </p>
+            </article>
+    <?php endif;?>
+
+    <?php if ($totalDirector = static::getSettings('total_director')):?>
+            <article>
+                <p>
+                    Vous avez <?=$totalDirector;?> directors.
+                    <a href="<?=static::getUrl('admin/director')?>">Modfication</a>
+                </p>
+            </article>
+    <?php endif;?>
+
+    <?php if ($totalMovie = static::getSettings('total_movie')):?>
+        <article>
+            <p>
+                Vous avez totalement plublié <?=$totalMovie;?> films sur le site.
+                <a href="<?=static::getUrl('admin/film')?>">Modfication</a>
+            </p>
+        </article>
+    <?php endif;?>
+</section>

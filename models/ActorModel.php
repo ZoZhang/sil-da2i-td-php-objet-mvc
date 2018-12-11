@@ -41,7 +41,15 @@ class ActorModel extends AbstractsModel {
             $_querys['parametes'][':idMovie'] = $options['id_movie'];
         }
 
+        if (isset($options['count_only'])) {
+            $_querys['fields'][] = 'count(*) as total';
+        }
+
         $allActors = $this->getData($_querys);
+
+        if (isset($options['count_only'])) {
+            return $allActors[0]->total;
+        }
 
         return $allActors;
     }

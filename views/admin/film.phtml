@@ -1,0 +1,55 @@
+<section>
+    <form name="film-post" action="<?=static::getUrl('admin/film')?>" method="post">
+    <article>
+        <header>
+            <h1>Films</h1>
+            <p>
+                <button type="submit" name="operation" value="add">Création</button>
+                <button type="submit" name="operation" value="modify">Modification</button>
+                <button type="submit" name="operation" value="delete">Suppression</button>
+            </p>
+        </header>
+    </article>
+    <?php if ($movies = static::getSettings('all_movie')):?>
+            <table>
+                <colgroup>
+                    <col width="2%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
+                    <col width="10%"/>
+                    <col width="10%"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Release Date</th>
+                    <th>Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($movies as $movie):?>
+                        <tr>
+                            <td><input type="checkbox" name="film[id][]" value="<?=$movie->id?>"/></td>
+                            <td>
+                                <a href="/movie/id/<?=$movie->id?>" target="_blank" alt="<?=$movie->film_legend?>">
+                                    <img src="<?=$movie->film_image;?>" alt="<?=$movie->film_legend?>" width="80"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/movie/id/<?=$movie->id?>" target="_blank">
+                                    <?=$movie->title;?>
+                                </a>
+                            </td>
+                            <td><?=$movie->releaseDate;?></td>
+                            <td><?=$movie->rating;?></td>
+                        </tr>
+                    <?php endforeach;?>
+                </tbody>
+            </table>
+        </form>
+    <?php else:?>
+        <p>Il n'y a aucun film.</p>
+    <?php endif;?>
+</section>

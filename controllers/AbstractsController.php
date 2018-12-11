@@ -42,6 +42,19 @@ abstract class AbstractsController
     }
 
     /**
+     * Getter data
+     * @return string||array
+     */
+    public static function getSettings($name='')
+    {
+        if (isset(static::$_settings[$name])) {
+            return static::$_settings[$name];
+        }
+
+        return static::$_settings;
+    }
+
+    /**
      * Getter an model
      */
     public static function getModel($name)
@@ -62,6 +75,18 @@ abstract class AbstractsController
     public static function getUrl($name='')
     {
         return static::getRequest('url') . $name . '/';
+    }
+
+    /**
+     * Rediction page
+     */
+    public static function redirectUrl($url,$msg='')
+    {
+        if (!$url) {
+            throw new AppException("Warning: url is required");
+        }
+
+        header("Location: ${url}");
     }
 
     /**

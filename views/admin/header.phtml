@@ -14,7 +14,10 @@
                     <a href="<?=static::getUrl('admin')?>">Dashboard</a>
                 </li>
                 <li>
-                    <a href="<?=static::getUrl('admin/film')?>">Film</a>
+                    <a href="<?=static::getUrl('admin/film')?>">Films</a>
+                    <ul>
+                        <li><a href="<?=static::getUrl('admin/film/add')?>">Add</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="<?=static::getUrl('admin/actor')?>">Actors</a>
@@ -26,8 +29,11 @@
                     <a href="<?=static::getUrl()?>" target="_blank">Voir Frontend</a>
                 </li>
                 <li>
+                    <a href="<?=static::getUrl('admin/logout')?>">Déconnexion</a>
                     <span>Bienvenue <?=static::getLoginUser('full_name');?></span>
                 </li>
             </ul>
         </nav>
     </header>
+    <main>
+

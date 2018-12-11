@@ -48,9 +48,9 @@ class DirectorModel extends AbstractsModel {
      * get all directors
      * @return array
      */
-    public function getAllDirectors()
+    public function getAllDirectors($options=[])
     {
-        $allDirectors = $this->getData([
+        $_querys = [
             'table'=> '`movieHasPerson` as MHP',
             'fields' => ['DISTINCT P.id', 'PT.path', 'P.firstname', 'P.lastname'],
             'left_join' => [
@@ -61,7 +61,17 @@ class DirectorModel extends AbstractsModel {
             'where' => 'MHP.role = :role',
             'order' => 'P.firstname ASC',
             'parametes' => [':role' => 'director']
-        ]);
+        ];
+
+        if (isset($options['count_only'])) {
+            $_querys['fields'][] = 'count(*) as total';
+        }
+
+        $allDirectors = $this->getData($_querys);
+
+        if (isset($options['count_only'])) {
+            return $allDirectors[0]->total;
+        }
 
         return $allDirectors;
     }
