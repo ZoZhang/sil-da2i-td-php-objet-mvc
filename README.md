@@ -1,4 +1,11 @@
-Bonjour,c'est un page php en utilisant HTML/CSS (responsive) et Mysql avec l'architecture MVC, il s'agit du'un exercice de notre professeur Pierre Alexis.
+Bonjour a tous.
+
+C'est un page php en utilisant HTML/CSS (responsive) et Mysql avec l'architecture MVC, il s'agit du'un exercice de notre professeur Pierre Alexis.
+
+Pour quelqu'un qui vuet voir le demo :
+ 
+ - Frontend : http://td2.web.zhaozhang.fr/
+ - Backend  : http://td2.web.zhaozhang.fr/admin  admin@test.com / dev.123
 
 Table des matières au TD2 https://www.solminihac.fr/sil-da2i/td-php-objet-mvc.html#2
 
