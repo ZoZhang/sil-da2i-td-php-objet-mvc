@@ -23,8 +23,19 @@ html,body{
 figcaption{
     font-style: italic;
 }
-.error-message {
+.message{
+    text-align: center;
+    max-width: 50%;
+    border-radius: 0.6rem;
+    margin: 0 auto 0.8rem auto;
+}
+.message.success {
+    color: #4CAF50;
+    border: 1px #4CAF50 solid;
+}
+.message.errors {
     color:#d81a1a;
+    border: 1px #d81a1a solid;
 }
 main section,
 main aside{
@@ -138,6 +149,54 @@ footer {
     color:#fff;
     background-color: #5a5858;
 }
+.admin main section:first-child article header{
+    display:flex;
+    background-color: #7b7b7b;
+}
+.admin main section:first-child article header a{
+    font-size:0.9rem;
+    line-height: 2.1rem;
+    padding: 0.25rem 0.6rem 0.3rem 0.6rem;
+}
+.admin main section:first-child article header a,
+.admin main section:first-child article header h1 {
+    color: #FFF;
+}
+.admin main section:first-child article header p{
+    margin:0;
+    flex:3;
+    padding: 0.2rem;
+}
+.admin main section:first-child article header h1{
+    flex:7;
+    line-height: 1.7rem;
+    padding: 0 0 0 0.4rem;
+}
+.admin main section:first-child table{
+    width:100%;
+}
+.admin main section:first-child table thead tr{
+    background-color: #bfbfbf;
+}
+.admin main section:first-child table tbody tr{
+    border-bottom:2px solid red;
+}
+.admin main section:first-child table tbody tr:nth-child(even)
+{
+    background-color: #bfbfbf;
+}
+.admin main section:first-child table tbody tr td{
+    text-align:center;
+}
+.admin main section:first-child table tbody tr td:nth-child(2) {
+    padding-top:0.4rem;
+}
+.admin main section:first-child table tbody tr td a{
+    color: #000;
+}
+.admin main section:first-child table tbody tr td a:hover{
+    background:none;
+}
 /**
  * Admin Login Page
  */
@@ -194,55 +253,4 @@ footer {
     float: right;
     margin: 0 0 0 2rem;
     display: inline-block;
-}
-/**
- * Admin Film Page
- */
-.admin-film main section:first-child article header{
-    display:flex;
-    background-color: #7b7b7b;
-}
-.admin-film main section:first-child article header a{
-    font-size:0.9rem;
-    line-height: 2.1rem;
-    padding: 0.25rem 0.6rem 0.3rem 0.6rem;
-}
-.admin-film main section:first-child article header a,
-.admin-film main section:first-child article header h1 {
-    color: #FFF;
-}
-.admin-film main section:first-child article header p{
-    margin:0;
-    flex:3;
-    padding: 0.2rem;
-}
-.admin-film main section:first-child article header h1{
-    flex:7;
-    line-height: 1.7rem;
-    padding: 0 0 0 0.4rem;
-}
-.admin-film main section:first-child table{
-    width:100%;
-}
-.admin-film main section:first-child table thead tr{
-    background-color: #bfbfbf;
-}
-.admin-film main section:first-child table tbody tr{
-    border-bottom:2px solid red;
-}
-.admin-film main section:first-child table tbody tr:nth-child(even)
-{
-    background-color: #bfbfbf;
-}
-.admin-film main section:first-child table tbody tr td{
-    text-align:center;
-}
-.admin-film main section:first-child table tbody tr td:nth-child(2) {
-    padding-top:0.4rem;
-}
-.admin-film main section:first-child table tbody tr td a{
-    color: #000;
-}
-.admin-film main section:first-child table tbody tr td a:hover{
-    background:none;
 }

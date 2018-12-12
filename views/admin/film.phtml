@@ -1,12 +1,18 @@
 <section>
+    <?php if(isset(static::$_responses['message'])):?>
+        <article class="message <?=static::$_responses['class']?>">
+            <p><?=static::$_responses['message']?></p>
+        </article>
+    <?php endif;?>
+
     <form name="film-post" action="<?=static::getUrl('admin/film')?>" method="post">
     <article>
         <header>
             <h1>Films</h1>
             <p>
-                <button type="submit" name="operation" value="add">Création</button>
-                <button type="submit" name="operation" value="modify">Modification</button>
-                <button type="submit" name="operation" value="delete">Suppression</button>
+                <button type="submit" name="film[operation]" value="add">Création</button>
+                <button type="submit" name="film[operation]" value="modify">Modification</button>
+                <button type="submit" name="film[operation]" value="delete">Suppression</button>
             </p>
         </header>
     </article>

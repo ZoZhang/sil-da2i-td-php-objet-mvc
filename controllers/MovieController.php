@@ -28,7 +28,7 @@ class MovieController extends \Film\AbstractsController
 
         $model = static::getModel('movie');
 
-        $options = array('id'=>static::getRequest('id'));
+        $options = array('id'=>static::getRequest('id', 1));
 
         $movie = $model->getBaseInfos($options);
 
@@ -44,7 +44,7 @@ class MovieController extends \Film\AbstractsController
 
         $model = static::getModel('movie');
 
-        $options = array('id_movie'=> static::getRequest('id'));
+        $options = array('id_movie'=> static::getRequest('id', 1));
 
         $photos = $model->getAllPhotos($options);
 
@@ -60,7 +60,7 @@ class MovieController extends \Film\AbstractsController
 
         $model = static::getModel('actor');
 
-        $options = array('id_movie'=> static::getRequest('id'));
+        $options = array('id_movie'=> static::getRequest('id', 1));
 
         $actors = $model->getAllActors($options);
 
@@ -76,7 +76,7 @@ class MovieController extends \Film\AbstractsController
 
         $model = static::getModel('director');
 
-        $options = array('id_movie'=> static::getRequest('id'));
+        $options = array('id_movie'=> static::getRequest('id', 1));
 
         $director = $model->getDirector($options);
 

@@ -13,8 +13,8 @@ abstract class AbstractsController
 {
     use \Film\Config;
 
-    //error messages
-    protected static $_errors = [];
+    //response messages
+    protected static $_responses = [];
 
     //current request data
     protected static $_requests = [];
@@ -29,43 +29,19 @@ abstract class AbstractsController
     protected static $_pageClass = '';
 
     /**
-     * Getter val request
-     * @return string
+     * Start Sessions
      */
-    public static function getRequest($name='')
+    public static function startSession()
     {
-        if (isset(static::$_requests[$name])) {
-            return static::$_requests[$name];
-        }
-
-        return null;
+        session_start();
     }
 
     /**
-     * Getter data
-     * @return string||array
+     * Get cur page custom class name
      */
-    public static function getSettings($name='')
+    protected static function getPageClass()
     {
-        if (isset(static::$_settings[$name])) {
-            return static::$_settings[$name];
-        }
-
-        return static::$_settings;
-    }
-
-    /**
-     * Getter an model
-     */
-    public static function getModel($name)
-    {
-        $className = '\\Film\\'. ucfirst($name) . 'Model';
-
-        if (!class_exists($className)) {
-            throw new AppException("Warning: {$className} is not class");
-        }
-
-        return new $className;
+        return static::$_pageClass;
     }
 
     /**
@@ -90,19 +66,35 @@ abstract class AbstractsController
     }
 
     /**
-     * Start Sessions
+     * Getter val request
+     * @return string
      */
-    public static function startSession()
+    public static function getRequest($name='',$default='')
     {
-        session_start();
+        return static::$_requests[$name] ?? ($default ?? null);
     }
 
     /**
-     * Get cur page custom class name
+     * Getter data
+     * @return string||array
      */
-    protected static function getPageClass()
+    public static function getSettings($name='')
     {
-        return static::$_pageClass;
+        return static::$_settings[$name] ?? static::$_settings;
+    }
+
+    /**
+     * Getter an model
+     */
+    public static function getModel($name)
+    {
+        $className = '\\Film\\'. ucfirst($name) . 'Model';
+
+        if (!class_exists($className)) {
+            throw new AppException("Warning: {$className} is not class");
+        }
+
+        return new $className;
     }
 
     /**
@@ -111,6 +103,7 @@ abstract class AbstractsController
     public static function dispatche()
     {
         $options = [];
+        $_actionName = '';
         preg_match('/^\/(\w+)(.*)/i', $_SERVER['REQUEST_URI'], $_controllerName);
 
         if (!isset($_controllerName[1])) {
@@ -153,13 +146,14 @@ abstract class AbstractsController
         $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
         $options['url'] = $http_type . $_SERVER['HTTP_HOST'] . '/';
 
-        self::$_requests = array_merge($options, $_REQUEST);
+        self::$_requests = array_merge($options, $_REQUEST, $_SERVER);
 
         //self::$_controller = new $_controllerName;
        // call_user_func(self::$_controller->loadLayout(), array('options'=>array()));
 
         if (!class_exists($_controllerName, $autoload = true)) {
             header('Location: /error');
+            exit;
         }
 
         call_user_func_array(array($_controllerName, 'startSession'), array());

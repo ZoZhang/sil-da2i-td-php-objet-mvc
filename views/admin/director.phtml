@@ -1,0 +1,62 @@
+<section>
+    <?php if(isset(static::$_responses['message'])):?>
+        <article class="message <?=static::$_responses['class']?>">
+            <p><?=static::$_responses['message']?></p>
+        </article>
+    <?php endif;?>
+
+    <form name="director-post" action="<?=static::getUrl('admin/director')?>" method="post">
+    <article>
+        <header>
+            <h1>directors</h1>
+            <p>
+                <button type="submit" name="director[operation]" value="add">Création</button>
+                <button type="submit" name="director[operation]" value="modify">Modification</button>
+                <button type="submit" name="director[operation]" value="delete">Suppression</button>
+            </p>
+        </header>
+    </article>
+    <?php if ($directors = static::getSettings('all_director')):?>
+            <table>
+                <colgroup>
+                    <col width="2%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
+                    <col width="10%"/>
+                    <col width="10%"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Birth Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($directors as $director):?>
+                        <?php if(!isset($director->id)):?>
+                            <?php continue;?>
+                        <?php endif;?>
+                        <tr>
+                            <td><input type="checkbox" name="director[id][]" value="<?=$director->id?>"/></td>
+                            <td>
+                                <a href="/movie/id/<?=$director->id?>" target="_blank" alt="<?=$director->legend?>">
+                                    <img src="<?=$director->path;?>" alt="<?=$director->legend?>" width="80"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/movie/id/<?=$director->id?>" target="_blank">
+                                    <?=$director->firstname;?>  <?=$director->lastname;?>
+                                </a>
+                            </td>
+                            <td><?=$director->birthDate;?></td>
+                        </tr>
+                    <?php endforeach;?>
+                </tbody>
+            </table>
+        </form>
+    <?php else:?>
+        <p>Il n'y a aucun director.</p>
+    <?php endif;?>
+</section>

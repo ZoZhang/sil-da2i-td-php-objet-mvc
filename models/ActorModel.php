@@ -18,7 +18,7 @@ class ActorModel extends AbstractsModel {
     {
         $_querys = [
             'table'=> '`movieHasPerson` as MP',
-            'fields' => ['DISTINCT P.id','P.firstname','P.lastname','PT.path'],
+            'fields' => ['DISTINCT P.id','P.firstname','P.lastname','P.birthDate','PT.path','PT.legend'],
             'left_join' => [
                 '`person` as P'=>'P.id = MP.idPerson',
                 '`personHasPicture` as PHP'=>'P.id = PHP.idPerson',

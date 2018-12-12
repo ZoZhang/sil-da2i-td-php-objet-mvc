@@ -68,4 +68,35 @@ abstract class AbstractsModel {
 
         return $_data;
     }
+
+
+    /**
+     * Delete movie by id
+     */
+    public function delete($parametes = [])
+    {
+        if (!isset($parametes['id'])) {
+            return false;
+        }
+
+        $ids = implode(',', $parametes['id']);
+
+        $_querys = [
+            'where' => "id in ($ids)",
+            'operation' => 'delete'
+        ];
+
+        //table name
+        if ($this instanceof ActorModel || $this instanceof DirectorModel) {
+            $_querys['table'] = '`person`';
+        } else if ($this instanceof MovieModel) {
+            $_querys['table'] = '`movie`';
+        }
+
+
+        //print_r($_querys);die;
+        return $this->getData($_querys);
+    }
+
+
 }

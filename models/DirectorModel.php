@@ -18,7 +18,7 @@ class DirectorModel extends AbstractsModel {
     {
         $_querys = [
             'table'=> '`movieHasPerson` as MP',
-            'fields' => ['P.id','P.firstname','P.lastname','MP.roleName','PT.path','PT.legend'],
+            'fields' => ['DISTINCT P.id','P.firstname','P.lastname','P.birthDate','MP.roleName','PT.path','PT.legend'],
             'left_join' => [
                 '`person` as P'=>'P.id = MP.idPerson',
                 '`personHasPicture` as PHP'=>'P.id = PHP.idPerson',
@@ -52,7 +52,7 @@ class DirectorModel extends AbstractsModel {
     {
         $_querys = [
             'table'=> '`movieHasPerson` as MHP',
-            'fields' => ['DISTINCT P.id', 'PT.path', 'P.firstname', 'P.lastname'],
+            'fields' => ['DISTINCT P.id', 'PT.path', 'PT.legend', 'P.firstname', 'P.lastname','P.birthDate'],
             'left_join' => [
                 '`person` P'=>'P.id = MHP.idPerson',
                 '`personHasPicture` as PHP'=>'P.id = PHP.idPerson',

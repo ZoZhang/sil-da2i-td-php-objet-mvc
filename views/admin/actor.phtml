@@ -1,0 +1,62 @@
+<section>
+    <?php if(isset(static::$_responses['message'])):?>
+        <article class="message <?=static::$_responses['class']?>">
+            <p><?=static::$_responses['message']?></p>
+        </article>
+    <?php endif;?>
+
+    <form name="actor-post" action="<?=static::getUrl('admin/actor')?>" method="post">
+    <article>
+        <header>
+            <h1>Actors</h1>
+            <p>
+                <button type="submit" name="actor[operation]" value="add">Création</button>
+                <button type="submit" name="actor[operation]" value="modify">Modification</button>
+                <button type="submit" name="actor[operation]" value="delete">Suppression</button>
+            </p>
+        </header>
+    </article>
+    <?php if ($actors = static::getSettings('all_actor')):?>
+            <table>
+                <colgroup>
+                    <col width="2%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
+                    <col width="10%"/>
+                    <col width="10%"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>birth Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($actors as $actor):?>
+                        <?php if(!isset($actor->id)):?>
+                            <?php continue;?>
+                        <?php endif;?>
+                        <tr>
+                            <td><input type="checkbox" name="actor[id][]" value="<?=$actor->id?>"/></td>
+                            <td>
+                                <a href="/movie/id/<?=$actor->id?>" target="_blank" alt="<?=$actor->film_legend?>">
+                                    <img src="<?=$actor->path;?>" alt="<?=$actor->firstname?>" width="80"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/movie/id/<?=$actor->id?>" target="_blank">
+                                    <?=$actor->firstname?>  <?=$actor->lastname?>
+                                </a>
+                            </td>
+                            <td><?=$actor->birthDate;?></td>
+                        </tr>
+                    <?php endforeach;?>
+                </tbody>
+            </table>
+        </form>
+    <?php else:?>
+        <p>Il n'y a aucun actor.</p>
+    <?php endif;?>
+</section>

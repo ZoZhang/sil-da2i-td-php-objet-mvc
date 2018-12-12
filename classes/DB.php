@@ -42,13 +42,15 @@ class DB {
         self::$_stmt = self::connect()->prepare($query);
     }
 
-    private static function query($parameters=array())
+    private static function query($options=[])
     {
-        if (!count($parameters)) {
-            throw new \Exception('Plese check your sql parametes.');
+        $_res = null;
+        if (!isset($options['parametes'])) {
+            $_res = self::$_stmt->execute();
+        } else {
+            $_res = self::$_stmt->execute($options['parametes']);
         }
-
-        self::$_stmt->execute($parameters);
+        return $_res;
     }
 
     private static function fetch()
@@ -70,13 +72,28 @@ class DB {
     {
         $sql = '';
 
-        if (!isset($options['table']) || !isset($options['fields'])) {
+        if (!isset($options['table'])) {
             throw new \PDOException('Pleles check your arguments.');
         }
 
-        $options['fields'] = implode($options['fields'],',');
+        if (!isset($options['fields'])){
+            $options['fields'] = '*';
+        } else if (is_array($options['fields'])) {
+            $options['fields'] = implode($options['fields'],',');
+        }
 
-        $sql .= "SELECT {$options['fields']} FROM {$options['table']}";
+        if (!isset($options['operation'])) {
+            $sql .= "SELECT {$options['fields']} FROM {$options['table']}";
+        } else {
+            switch ($options['operation']) {
+                case 'delete':
+                    $sql .= "DELETE FROM {$options['table']}";
+                    break;
+                case 'update':
+                    $sql .= "UPDATE {$options['table']}";
+                    break;
+            }
+        }
 
         if (isset($options['left_join'])) {
             foreach($options['left_join'] as $left_join => $left_on) {
@@ -104,22 +121,22 @@ class DB {
     public static function getData($options=[])
     {
         try {
+            $res = false;
             $data = [];
-
             $sql = self::getSQL($options);
 
             self::prepare($sql);
 
-            if (isset($options['parametes'])) {
-                self::query($options['parametes']);
-            }
+            $res = self::query($options);
 
-            $data = self::fetch();
+            if (!isset($options['operation'])) {
+                $data = self::fetch();
+                return $data;
+            }
         } catch (\PDOException $e) {
-            print_r($e->getMessage());die;
-            throw new \Exception($e->getMessage());
+            throw new AppException("Errors: ". $e->getMessage());
         }
 
-        return $data;
+        return $res;
     }
 }

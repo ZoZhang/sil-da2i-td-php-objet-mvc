@@ -15,13 +15,16 @@ define('PS', PATH_SEPARATOR);
 define('CP', dirname(__FILE__));
 define('ROOT_PATH', realpath(CP));
 define('LOG_PATH', ROOT_PATH . DS . 'var' . DS . 'log');
+define('SESSION_PATH', ROOT_PATH . DS . 'var' . DS . 'sessions');
 define('TEMPLATE_PATH', ROOT_PATH . DS . 'views' . DS . 'template');
 define('ADMIN_TEMPLATE_PATH', ROOT_PATH . DS . 'views' . DS . 'admin');
 
 //Initialiser les errors logs configs
-ini_set('error_reporting', '-1'); // '-1' : toutes les erreurs possibles
-ini_set('display_errors', 'off');
-ini_set('log_errors', 'on');
+//ini_set('error_reporting', '-1'); // '-1' : toutes les erreurs possibles
+ini_set('display_errors', 'on');
+//ini_set('log_errors', 'on');
+
+session_save_path(SESSION_PATH);
 
 //Initializer les repertoir include
 set_include_path(
